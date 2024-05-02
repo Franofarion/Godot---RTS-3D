@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://df24bpa2sxsgt"]
+
+[ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
+[ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qp8yk"]
+vertices = PackedVector3Array(-149.5, 0.5, -149.5, -149.5, 0.5, 149.5, 149.5, 0.5, 149.5, 149.5, 0.5, -149.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 4294967285
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gotry"]
+material = ExtResource("1_bmfmw")
+size = Vector2(300, 300)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7vbj7"]
+data = PackedVector3Array(150, 0, 150, -150, 0, 150, 150, 0, -150, -150, 0, 150, -150, 0, -150, 150, 0, -150)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qgc1t"]
+
+[sub_resource type="Sky" id="Sky_853vg"]
+sky_material = SubResource("ProceduralSkyMaterial_qgc1t")
+
+[sub_resource type="Environment" id="Environment_jb6ww"]
+background_mode = 2
+sky = SubResource("Sky_853vg")
+sdfgi_enabled = true
+sdfgi_cascades = 1
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.025
+volumetric_fog_detail_spread = 4.28709
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_brightness = 0.66
+
+[node name="World" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_qp8yk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_gotry")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_7vbj7")
+
+[node name="RTSController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0)
+script = ExtResource("1_0vw6l")
+
+[node name="Camera3D" type="Camera3D" parent="RTSController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 17)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.999913, -0.0131768, 0, 0.0131768, -0.999913, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jb6ww")
