@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://df24bpa2sxsgt"]
+[gd_scene load_steps=10 format=3 uid="uid://df24bpa2sxsgt"]
 
 [ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
 [ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
+[ext_resource type="PackedScene" uid="uid://7nme3gtvv5uk" path="res://Scenes/worker.tscn" id="3_bqdl5"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_qp8yk"]
 vertices = PackedVector3Array(-149.5, 0.5, -149.5, -149.5, 0.5, 149.5, 149.5, 0.5, 149.5, 149.5, 0.5, -149.5)
@@ -58,3 +59,8 @@ transform = Transform3D(1, 0, 0, 0, -0.999913, -0.0131768, 0, 0.0131768, -0.9999
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jb6ww")
+
+[node name="Worker" parent="." instance=ExtResource("3_bqdl5")]
+
+[node name="Worker2" parent="." instance=ExtResource("3_bqdl5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03099, 0, 0)
