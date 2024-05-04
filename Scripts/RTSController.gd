@@ -3,6 +3,7 @@ extends Node3D
 const MOVE_MARGIN : int = 20
 const MOVE_SPEED : int = 15
 @onready var cam : Camera3D = $Camera3D
+@onready var selection_box : Node = $UnitSelector
 var m_pos := Vector2()
 
 # team worker
@@ -12,6 +13,7 @@ var selected_units : Array = []
 var old_selected_units : Array = []
 var start_sel_pos = Vector2()
 
+const selection_limit = 24
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,7 +23,7 @@ func _input(event):
 	if event.is_action_pressed("wheel_down"):
 		cam.fov = lerp(cam.fov, 75.0, 0.25)
 	elif event.is_action_pressed("wheel_up"):
-		cam.fov = lerp(cam.fov, 45.0, 0.25)		
+		cam.fov = lerp(cam.fov, 25.0, 0.25)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -32,9 +34,15 @@ func _process(delta):
 	if Input.is_action_just_pressed("command"):
 		move_selected_units()
 	if Input.is_action_just_pressed("select"):
+		selection_box.start_pos = m_pos
 		start_sel_pos = m_pos
 	if Input.is_action_just_released("select"):
 		select_units()
+	if Input.is_action_pressed("select"):
+		selection_box.m_pos = m_pos
+		selection_box.is_visible = true
+	else:
+		selection_box.is_visible = false
 
 func camera_movement(delta):
 	var viewport_size : Vector2 = get_viewport().size
@@ -84,7 +92,9 @@ func select_units():
 	if m_pos.distance_squared_to(start_sel_pos) < 16: 
 		if main_unit != null:
 			selected_units.append(main_unit)
-
+	else:
+		selected_units = get_unit_in_box(start_sel_pos, m_pos)
+	
 	if selected_units.size() != 0:
 		clean_current_units_and_apply_new(selected_units)
 	if selected_units.size() == 0:
@@ -103,6 +113,24 @@ func move_selected_units():
 	# 1 => Map / 2 => units / 3 => building / 6 => Resources
 	var result = raycast_from_mouse(0b100111)
 	if selected_units.size() != 0:
-		var first_unit = selected_units[0]
 		if result.collider.is_in_group("surface"):
-			first_unit.move_to(result.position)
+			for unit in selected_units:
+				unit.move_to(result.position)
+
+func get_unit_in_box(top_left, bot_right):
+	if top_left.x > bot_right.x:
+		var tmp = top_left.x
+		top_left.x = bot_right.x
+		bot_right.x = tmp
+	if top_left.y > bot_right.y:
+		var tmp = top_left.y
+		top_left.y = bot_right.y
+		bot_right.y = tmp
+		
+	var box = Rect2(top_left, bot_right - top_left)
+	var box_selected_unit = []
+	for unit in get_tree().get_nodes_in_group("units"):
+		if unit.team == team and box.has_point(cam.unproject_position(unit.global_transform.origin)):
+			if box_selected_unit.size() <= selection_limit:
+				box_selected_unit.append(unit)
+	return box_selected_unit
