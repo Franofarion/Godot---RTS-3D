@@ -27,6 +27,10 @@ func _input(event):
 func _process(delta):
 	m_pos = get_viewport().get_mouse_position()
 	camera_movement(delta)
+	
+	# Inputs 
+	if Input.is_action_just_pressed("command"):
+		move_selected_units()
 	if Input.is_action_just_pressed("select"):
 		start_sel_pos = m_pos
 	if Input.is_action_just_released("select"):
@@ -93,3 +97,12 @@ func clean_current_units_and_apply_new(new_units):
 	for unit in new_units:
 		# todo: add if select exist in unit
 		unit.select()
+
+func move_selected_units():
+	# get collision on first, second, third and sixth layers
+	# 1 => Map / 2 => units / 3 => building / 6 => Resources
+	var result = raycast_from_mouse(0b100111)
+	if selected_units.size() != 0:
+		var first_unit = selected_units[0]
+		if result.collider.is_in_group("surface"):
+			first_unit.move_to(result.position)

@@ -42,7 +42,7 @@ navigation_mesh = SubResource("NavigationMesh_qp8yk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 mesh = SubResource("PlaneMesh_gotry")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D" groups=["surface"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7vbj7")
