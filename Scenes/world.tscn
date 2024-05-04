@@ -1,9 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://df24bpa2sxsgt"]
+[gd_scene load_steps=16 format=3 uid="uid://df24bpa2sxsgt"]
 
 [ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
 [ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
 [ext_resource type="PackedScene" uid="uid://7nme3gtvv5uk" path="res://Scenes/worker.tscn" id="3_bqdl5"]
 [ext_resource type="Script" path="res://Scripts/UnitSelector.gd" id="3_rlpkm"]
+[ext_resource type="Texture2D" uid="uid://k7fnbofhk0c2" path="res://Project Assets/GUI/DetailBar.png" id="5_hbtay"]
+[ext_resource type="Script" path="res://Scripts/GUIController.gd" id="5_jk4fq"]
+[ext_resource type="Texture2D" uid="uid://d2p1j6ypo4vf5" path="res://Project Assets/GUI/MiniMap_Portrait.png" id="6_1pmea"]
+[ext_resource type="Texture2D" uid="uid://cligqukgffx0t" path="res://Project Assets/GUI/SelectionBar.png" id="7_0qv4w"]
+[ext_resource type="Texture2D" uid="uid://bb8sf1tl1kjka" path="res://Project Assets/GUI/WorkerImg.jpg" id="8_rugpl"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_qp8yk"]
 vertices = PackedVector3Array(-149.5, 0.5, -149.5, -149.5, 0.5, 149.5, 149.5, 0.5, 149.5, 149.5, 0.5, -149.5)
@@ -70,97 +75,177 @@ transform = Transform3D(1, 0, 0, 0, -0.999913, -0.0131768, 0, 0.0131768, -0.9999
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jb6ww")
 
-[node name="Worker" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Units" type="Node" parent="."]
 
-[node name="Worker2" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker" parent="Units" instance=ExtResource("3_bqdl5")]
+
+[node name="Worker2" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03099, 0, 0)
 
-[node name="Worker3" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker3" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.09974)
 
-[node name="Worker4" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker4" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03099, 0, -1.09974)
 
-[node name="Worker5" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker5" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90065, 0, 0)
 
-[node name="Worker6" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker6" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93164, 0, 0)
 
-[node name="Worker7" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker7" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90065, 0, -1.09974)
 
-[node name="Worker8" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker8" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93164, 0, -1.09974)
 
-[node name="Worker9" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker9" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.21237)
 
-[node name="Worker10" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker10" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03099, 0, -2.21237)
 
-[node name="Worker11" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker11" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.31211)
 
-[node name="Worker12" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker12" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03099, 0, -3.31211)
 
-[node name="Worker13" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker13" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90065, 0, -2.21237)
 
-[node name="Worker14" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker14" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93164, 0, -2.21237)
 
-[node name="Worker15" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker15" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90065, 0, -3.31211)
 
-[node name="Worker16" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker16" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.93164, 0, -3.31211)
 
-[node name="Worker17" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker17" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96794, 0, 0)
 
-[node name="Worker18" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker18" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93695, 0, 0)
 
-[node name="Worker19" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker19" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96794, 0, -1.09974)
 
-[node name="Worker20" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker20" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93695, 0, -1.09974)
 
-[node name="Worker21" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker21" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673, 0, 0)
 
-[node name="Worker22" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker22" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03631, 0, 0)
 
-[node name="Worker23" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker23" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673, 0, -1.09974)
 
-[node name="Worker24" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker24" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03631, 0, -1.09974)
 
-[node name="Worker25" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker25" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96794, 0, -2.21237)
 
-[node name="Worker26" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker26" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93695, 0, -2.21237)
 
-[node name="Worker27" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker27" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96794, 0, -3.31211)
 
-[node name="Worker28" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker28" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93695, 0, -3.31211)
 
-[node name="Worker29" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker29" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673, 0, -2.21237)
 
-[node name="Worker30" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker30" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03631, 0, -2.21237)
 
-[node name="Worker31" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker31" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673, 0, -3.31211)
 
-[node name="Worker32" parent="." instance=ExtResource("3_bqdl5")]
+[node name="Worker32" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03631, 0, -3.31211)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="GUIController" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_jk4fq")
+
+[node name="InfoBar" type="TextureRect" parent="CanvasLayer/GUIController"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -582.0
+offset_top = -241.0
+offset_right = 561.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_hbtay")
+expand_mode = 1
+
+[node name="MiniMapContainer" type="TextureRect" parent="CanvasLayer/GUIController"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -386.0
+offset_right = 381.0
+grow_vertical = 0
+texture = ExtResource("6_1pmea")
+expand_mode = 1
+
+[node name="SelectionBar" type="TextureRect" parent="CanvasLayer/GUIController"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_top = -254.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("7_0qv4w")
+expand_mode = 1
+
+[node name="MainUnitImgContainer" type="TextureRect" parent="CanvasLayer/GUIController"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 411.0
+offset_top = -207.0
+offset_right = 611.0
+offset_bottom = -33.0
+grow_vertical = 0
+texture = ExtResource("6_1pmea")
+expand_mode = 1
+
+[node name="MainUnitImg" type="TextureRect" parent="CanvasLayer/GUIController/MainUnitImgContainer"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.51
+offset_top = -162.5
+offset_right = 190.51
+offset_bottom = -11.5
+grow_vertical = 0
+texture = ExtResource("8_rugpl")
+expand_mode = 1
