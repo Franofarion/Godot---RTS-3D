@@ -5,6 +5,7 @@ const MOVE_SPEED : int = 15
 @onready var cam : Camera3D = $Camera3D
 @onready var selection_box : Node = $UnitSelector
 var m_pos := Vector2()
+@export var units_in_circle : int = 4
 
 # team worker
 var team : int = 0
@@ -12,6 +13,8 @@ const ray_length : int = 1000
 var selected_units : Array = []
 var old_selected_units : Array = []
 var start_sel_pos = Vector2()
+var target_positions_list : Array[Vector3] = []
+var unit_pos_index = 0
 
 const selection_limit = 24
 
@@ -112,10 +115,11 @@ func move_selected_units():
 	# get collision on first, second, third and sixth layers
 	# 1 => Map / 2 => units / 3 => building / 6 => Resources
 	var result = raycast_from_mouse(0b100111)
+	unit_pos_index = 0
 	if selected_units.size() != 0:
 		if result.collider.is_in_group("surface"):
 			for unit in selected_units:
-				unit.move_to(result.position)
+				position_units(unit, result)
 
 func get_unit_in_box(top_left, bot_right):
 	if top_left.x > bot_right.x:
@@ -134,3 +138,31 @@ func get_unit_in_box(top_left, bot_right):
 			if box_selected_unit.size() <= selection_limit:
 				box_selected_unit.append(unit)
 	return box_selected_unit
+
+func create_units_position_in_a_circle(target_pos: Vector3, units_num: int):
+	var position_list : Array[Vector3] = []
+	var radius : float = 1.0
+	var center = Vector2(target_pos.x, target_pos.z)
+	var max_units_in_circle = units_in_circle
+	var angle_step = PI * 2 / max_units_in_circle
+	var angle = 0
+	var unit_count = 0
+	for i in range(0, units_num):
+		if unit_count == max_units_in_circle:
+			radius += 1
+			unit_count = 0
+			angle = 0
+			max_units_in_circle *= 2
+			angle_step = PI * 2 / max_units_in_circle
+		var direction = Vector2(cos(angle), sin(angle))
+		var pos = center + direction * radius
+		var pos_3d = Vector3(pos.x, 0, pos.y)
+		position_list.append(pos_3d)
+		unit_count += 1
+		angle += angle_step
+	return position_list
+
+func position_units(unit, result):
+	target_positions_list = create_units_position_in_a_circle(result.position, len(selected_units))
+	unit.move_to(target_positions_list[unit_pos_index])
+	unit_pos_index += 1
