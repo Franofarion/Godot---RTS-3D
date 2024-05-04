@@ -52,6 +52,7 @@ shape = SubResource("ConcavePolygonShape3D_7vbj7")
 transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0)
 script = ExtResource("1_0vw6l")
 units_in_circle = 6
+units_in_line = 4
 
 [node name="Camera3D" type="Camera3D" parent="RTSController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 17)

@@ -6,6 +6,7 @@ const MOVE_SPEED : int = 15
 @onready var selection_box : Node = $UnitSelector
 var m_pos := Vector2()
 @export var units_in_circle : int = 4
+@export var units_in_line: int = 6
 
 # team worker
 var team : int = 0
@@ -162,7 +163,33 @@ func create_units_position_in_a_circle(target_pos: Vector3, units_num: int):
 		angle += angle_step
 	return position_list
 
+func create_units_position_in_a_rect(target_pos: Vector3, units_num: int) -> Array[Vector3]:
+	var line_position_list: Array[Vector3] = []
+	var position_list: Array[Vector3] = []
+	var new_target_position = target_pos
+	var x_pos = 1
+	var z_pos = 1
+	var num_of_lines = ceil(units_num / units_in_line)
+	for i in units_in_line:
+		line_position_list.append(new_target_position)
+		position_list.append(new_target_position)
+		new_target_position = Vector3(target_pos.x + x_pos, target_pos.y, target_pos.z)
+		if i%2 == 1:
+			x_pos -= 1
+		x_pos = -x_pos
+	for i in num_of_lines:
+		for k in units_in_line:
+			var new_pos = Vector3(line_position_list[k].x,
+									line_position_list[k].y,
+									line_position_list[k].z + z_pos)
+			position_list.append(new_pos)
+		if i%2 == 1:
+			z_pos -= 1
+		z_pos = -z_pos
+	return position_list
+
+
 func position_units(unit, result):
-	target_positions_list = create_units_position_in_a_circle(result.position, len(selected_units))
+	target_positions_list = create_units_position_in_a_rect(result.position, len(selected_units))
 	unit.move_to(target_positions_list[unit_pos_index])
 	unit_pos_index += 1
