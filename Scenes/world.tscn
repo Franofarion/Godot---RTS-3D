@@ -249,3 +249,20 @@ offset_bottom = -11.5
 grow_vertical = 0
 texture = ExtResource("8_rugpl")
 expand_mode = 1
+
+[node name="UnitsGrid" type="GridContainer" parent="CanvasLayer/GUIController"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -213.0
+offset_right = 523.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 8
+
+[connection signal="units_selected" from="RTSController" to="CanvasLayer/GUIController" method="_on_rts_controller_units_selected"]

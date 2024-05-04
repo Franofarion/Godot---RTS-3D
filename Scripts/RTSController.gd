@@ -8,6 +8,8 @@ var m_pos := Vector2()
 @export var units_in_circle : int = 4
 @export var units_in_line: int = 6
 
+signal units_selected(units: Array)
+
 # team worker
 var team : int = 0
 const ray_length : int = 1000
@@ -101,6 +103,7 @@ func select_units():
 	
 	if selected_units.size() != 0:
 		clean_current_units_and_apply_new(selected_units)
+		emit_signal("units_selected", selected_units)
 	if selected_units.size() == 0:
 		selected_units = old_selected_units
 

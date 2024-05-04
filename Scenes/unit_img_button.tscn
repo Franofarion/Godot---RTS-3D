@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c743hxj7gegks"]
+
+[ext_resource type="Texture2D" uid="uid://bb8sf1tl1kjka" path="res://Project Assets/GUI/WorkerImg.jpg" id="1_kxlkb"]
+
+[node name="UnitImgButton" type="TextureButton"]
+custom_minimum_size = Vector2(80, 60)
+texture_normal = ExtResource("1_kxlkb")
+ignore_texture_size = true
+stretch_mode = 0
