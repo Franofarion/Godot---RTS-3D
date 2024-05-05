@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://udwph81goyv4"]
+[gd_scene load_steps=8 format=3 uid="uid://udwph81goyv4"]
 
 [ext_resource type="Script" path="res://Scripts/unit_building.gd" id="1_n8utv"]
 [ext_resource type="PackedScene" uid="uid://bjmqplgkdi3c4" path="res://Project Assets/Build3/Building3.glb" id="2_kig5f"]
+[ext_resource type="PackedScene" uid="uid://h0hkkc2ok4hs" path="res://Scenes/unit_progress_container.tscn" id="3_il67y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6vdqc"]
 size = Vector3(0.15, 1, 0.15)
@@ -46,3 +47,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_ytt42")
+
+[node name="UnitProgressContainer" parent="." instance=ExtResource("3_il67y")]
+visible = false

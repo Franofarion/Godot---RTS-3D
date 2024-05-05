@@ -213,3 +213,4 @@ transform = Transform3D(1, 0, 0, 0, -1.19209e-07, -1, 0, 1, -1.19209e-07, 0, 0, 
 shape = SubResource("ConcavePolygonShape3D_3vg4g")
 
 [node name="UnitProgressContainer" parent="." instance=ExtResource("7_ynbto")]
+visible = false

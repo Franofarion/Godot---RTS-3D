@@ -124,3 +124,10 @@ func cancel_unit(img, unit):
 	img.queue_free()
 	current_created_units -= 1
 	repeat_or_finish_spawning()
+
+func move_to(target_pos):
+	var closest_pos = NavigationServer3D.map_get_closest_point(
+		get_world_3d().get_navigation_map(), target_pos
+	)
+	unit_destination.global_transform.origin = closest_pos
+	

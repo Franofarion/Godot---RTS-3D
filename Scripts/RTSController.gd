@@ -122,9 +122,13 @@ func move_selected_units():
 	var result = raycast_from_mouse(0b100111)
 	unit_pos_index = 0
 	if selected_units.size() != 0:
+		var first_unit = selected_units[0]
 		if result.collider.is_in_group("surface"):
-			for unit in selected_units:
-				position_units(unit, result)
+			if first_unit is Building:
+				first_unit.move_to(result.position)
+			elif first_unit is Unit:
+				for unit in selected_units:
+					position_units(unit, result)
 
 func get_unit_in_box(top_left, bot_right):
 	if top_left.x > bot_right.x:
