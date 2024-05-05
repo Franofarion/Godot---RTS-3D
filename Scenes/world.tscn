@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://df24bpa2sxsgt"]
+[gd_scene load_steps=18 format=3 uid="uid://df24bpa2sxsgt"]
 
 [ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
 [ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://k7fnbofhk0c2" path="res://Project Assets/GUI/DetailBar.png" id="5_hbtay"]
 [ext_resource type="Script" path="res://Scripts/GUIController.gd" id="5_jk4fq"]
 [ext_resource type="Texture2D" uid="uid://d2p1j6ypo4vf5" path="res://Project Assets/GUI/MiniMap_Portrait.png" id="6_1pmea"]
+[ext_resource type="PackedScene" uid="uid://cfssbhqkwdysq" path="res://Scenes/warrior.tscn" id="6_wvnml"]
 [ext_resource type="Texture2D" uid="uid://cligqukgffx0t" path="res://Project Assets/GUI/SelectionBar.png" id="7_0qv4w"]
 [ext_resource type="Texture2D" uid="uid://bb8sf1tl1kjka" path="res://Project Assets/GUI/WorkerImg.jpg" id="8_rugpl"]
 
@@ -175,6 +176,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0673, 0, -3.31211)
 
 [node name="Worker32" parent="Units" instance=ExtResource("3_bqdl5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03631, 0, -3.31211)
+
+[node name="Warrior" parent="Units" instance=ExtResource("6_wvnml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.172908, 0.178391, -6.06174)
+
+[node name="Warrior2" parent="Units" instance=ExtResource("6_wvnml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28644, 0.178391, -6.06174)
+
+[node name="Warrior3" parent="Units" instance=ExtResource("6_wvnml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33321, 0.178391, -6.06174)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

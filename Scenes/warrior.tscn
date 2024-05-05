@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfssbhqkwdysq"]
+
+[ext_resource type="PackedScene" uid="uid://7nme3gtvv5uk" path="res://Scenes/worker.tscn" id="1_2ic7r"]
+[ext_resource type="Script" path="res://Scripts/warrior.gd" id="2_sq3xu"]
+
+[node name="Warrior" instance=ExtResource("1_2ic7r")]
+script = ExtResource("2_sq3xu")
+
+[node name="Hammer" parent="Armature/Skeleton3D/BoneAttachment3D/weapon/weapon2" index="0"]
+visible = false
+
+[node name="Mace" parent="Armature/Skeleton3D/BoneAttachment3D/weapon/weapon2" index="1"]
+visible = true
+
+[editable path="Armature/Skeleton3D/BoneAttachment3D/weapon"]
