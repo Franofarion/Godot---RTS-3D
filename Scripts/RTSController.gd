@@ -85,7 +85,8 @@ func raycast_from_mouse(collision_mask):
 	return space_rate.intersect_ray(prqp)
 
 func get_unit_under_mouse():
-	var result_unit = raycast_from_mouse(2)
+	## 0b110, second & third layer
+	var result_unit = raycast_from_mouse(0b110)
 	if result_unit and "team" in result_unit.collider and result_unit.collider.team == team:
 		var selected_unit = result_unit.collider
 		return selected_unit
