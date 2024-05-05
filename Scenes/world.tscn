@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://df24bpa2sxsgt"]
+[gd_scene load_steps=20 format=3 uid="uid://df24bpa2sxsgt"]
 
 [ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
 [ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cfssbhqkwdysq" path="res://Scenes/warrior.tscn" id="6_wvnml"]
 [ext_resource type="Texture2D" uid="uid://cligqukgffx0t" path="res://Project Assets/GUI/SelectionBar.png" id="7_0qv4w"]
 [ext_resource type="Texture2D" uid="uid://bb8sf1tl1kjka" path="res://Project Assets/GUI/WorkerImg.jpg" id="8_rugpl"]
+[ext_resource type="Texture2D" uid="uid://djhyxgkv3fwth" path="res://Project Assets/GUI/MainBuildingImg.jpg" id="12_lcicx"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_qp8yk"]
 vertices = PackedVector3Array(-10, 0.5, -17.75, -9, 0.5, -17.75, -9, 0.5, -149.5, -10.75, 0.5, -17, -10, 0.5, -17.75, -9, 0.5, -149.5, -149.5, 0.5, -149.5, -149.5, 0.5, -15.75, -149.5, 0.5, -15.75, -10.75, 0.5, -15.75, -10.75, 0.5, -17, -3.5, 0.5, -16.25, -2.5, 0.75, -16.25, -2.25, 0.5, -18, -7.75, 0.5, -17.75, -7, 0.5, -16.75, -7, 0.5, -15.75, -3.5, 0.75, -15.75, -3.5, 0.5, -16.25, -7, 0.5, -16.75, -7.75, 0.5, -17.75, -2.25, 0.5, -18, -1.5, 0.5, -18.5, -1.5, 0.5, -149.5, -9, 0.5, -149.5, -9, 0.5, -17.75, -1.5, 0.5, -18.5, 1.5, 0.5, -18.5, 1.5, 0.5, -149.5, -1.5, 0.5, -149.5, 2.25, 0.5, -18, 2.5, 0.75, -16.25, 3.5, 0.5, -16.25, 1.5, 0.5, -149.5, 1.5, 0.5, -18.5, 2.25, 0.5, -18, 1.5, 0.5, -149.5, 2.25, 0.5, -18, 3.5, 0.5, -16.25, 149.5, 0.5, -15.75, 149.5, 0.5, -149.5, 3.5, 0.5, -16.25, 3.5, 0.75, -15.75, 149.5, 0.5, -15.75, -10.75, 0.5, -14.75, -10.75, 0.5, -15.75, -149.5, 0.5, -15.75, -10, 0.5, -14, -10.75, 0.5, -14.75, -149.5, 0.5, -15.75, -149.5, 0.5, 149.5, -9, 0.5, 149.5, -9, 0.5, 149.5, -9, 0.5, -14, -10, 0.5, -14, -1.75, 0.5, -13.5, -2, 1, -14.5, -2.75, 0.5, -14.5, -2.75, 0.5, -14.5, -3.5, 0.75, -15.75, -7, 0.5, -15.75, -2.75, 0.5, -14.5, -7, 0.5, -15.75, -7.75, 0.5, -14, -1.75, 0.5, -13.5, -1.75, 0.5, -13.5, -7.75, 0.5, -14, -9, 0.5, -14, -9, 0.5, 149.5, 0.25, 0.5, 149.5, 0.25, 0.5, -13, -0.25, 4, -15.75, -0.25, 4, -15.25, 0.25, 4, -15.25, 0.25, 4, -15.75, 2.75, 0.5, -14.5, 2.25, 1, -14.5, 2, 0.5, -13.5, 149.5, 0.5, -15.75, 3.5, 0.75, -15.75, 2.75, 0.5, -14.5, 149.5, 0.5, -15.75, 2.75, 0.5, -14.5, 2, 0.5, -13.5, 149.5, 0.5, -15.75, 2, 0.5, -13.5, 0.25, 0.5, -13, 0.25, 0.5, 149.5, 149.5, 0.5, 149.5)
@@ -242,6 +243,31 @@ grow_vertical = 0
 texture = ExtResource("7_0qv4w")
 expand_mode = 1
 
+[node name="BuildingGrid" type="GridContainer" parent="CanvasLayer/GUIController/SelectionBar"]
+layout_mode = 0
+anchor_left = 0.0609756
+anchor_top = 0.102362
+anchor_right = 0.941463
+anchor_bottom = 0.964567
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 28
+columns = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionButtonOne" type="TextureButton" parent="CanvasLayer/GUIController/SelectionBar/BuildingGrid"]
+custom_minimum_size = Vector2(72.5, 54.3)
+layout_mode = 2
+texture_normal = ExtResource("12_lcicx")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="OptionButtonTwo" type="TextureButton" parent="CanvasLayer/GUIController/SelectionBar/BuildingGrid"]
+custom_minimum_size = Vector2(72.5, 54.3)
+layout_mode = 2
+texture_normal = ExtResource("12_lcicx")
+ignore_texture_size = true
+stretch_mode = 0
+
 [node name="MainUnitImgContainer" type="TextureRect" parent="CanvasLayer/GUIController"]
 layout_mode = 1
 anchors_preset = 2
@@ -284,3 +310,5 @@ grow_vertical = 0
 columns = 8
 
 [connection signal="units_selected" from="RTSController" to="CanvasLayer/GUIController" method="_on_rts_controller_units_selected"]
+[connection signal="pressed" from="CanvasLayer/GUIController/SelectionBar/BuildingGrid/OptionButtonOne" to="CanvasLayer/GUIController" method="_on_option_button_one_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUIController/SelectionBar/BuildingGrid/OptionButtonTwo" to="CanvasLayer/GUIController" method="_on_option_button_two_pressed"]

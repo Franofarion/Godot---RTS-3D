@@ -1,5 +1,7 @@
 extends Unit
 
+class_name Worker
+
 func _ready():
 	super._ready()
 	unit_type = unit_types.WORKER

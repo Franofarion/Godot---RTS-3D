@@ -6,4 +6,4 @@ func _ready():
 	super._ready()
 	building_type = building_types.UNIT_BUILDING
 	cost = 300
-	units_img = preload("res://Project Assets/GUI/UnitBuildingImg.jpg")
+	unit_img = preload("res://Project Assets/GUI/UnitBuildingImg.jpg")
