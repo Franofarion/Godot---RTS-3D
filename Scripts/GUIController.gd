@@ -14,16 +14,17 @@ const warrior_unit_img: CompressedTexture2D = preload("res://Project Assets/GUI/
 @onready var main_unit_img = $MainUnitImgContainer/MainUnitImg
 @onready var button_one_img = $SelectionBar/BuildingGrid/OptionButtonOne
 @onready var button_two_img = $SelectionBar/BuildingGrid/OptionButtonTwo
-
+@onready var minerals_label = $Minerals/Label
 
 var unit_img_button = preload("res://Scenes/unit_img_button.tscn")
 var current_units = []
 var button_one_unit
 var button_two_unit
+var minerals : int = 5000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	minerals_label.text = str(minerals)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,3 +81,12 @@ func set_button_images():
 		button_two_img.texture_normal = unit_building_img
 	if current_units[0] is Warrior:
 		hide_buttons()
+
+func spend_minerals(num):
+	if minerals >= num:
+		minerals -= num
+		minerals_label.text = str(minerals)
+
+func add_minerals(num):
+	minerals += num
+	minerals_label.text = str(minerals)
