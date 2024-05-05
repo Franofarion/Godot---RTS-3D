@@ -58,11 +58,11 @@ func show_buttons(active_buttons_num):
 
 
 func _on_option_button_one_pressed():
-	pass # Replace with function body.
+	activate_button(button_one_unit)
 
 
 func _on_option_button_two_pressed():
-	pass # Replace with function body.
+	activate_button(button_two_unit)
 
 func set_button_images():
 	if current_units[0] is MainBuilding:
@@ -90,3 +90,16 @@ func spend_minerals(num):
 func add_minerals(num):
 	minerals += num
 	minerals_label.text = str(minerals)
+
+func activate_button(button):
+	var unit_button_ins = button.instantiate()
+	var selected_unit = current_units[0]
+	if unit_button_ins is Building:
+		var unit_cost = unit_button_ins.cost
+		if minerals >= unit_cost:
+			spend_minerals(unit_cost)
+	elif unit_button_ins is Unit:
+		var unit_cost = unit_button_ins.cost
+		if minerals >= unit_cost and selected_unit.current_created_units <= selected_unit.max_units:
+			spend_minerals(unit_cost)
+			selected_unit.add_unit_to_spawn(unit_button_ins)
