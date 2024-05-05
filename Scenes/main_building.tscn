@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://djbah3h28qafn"]
 
-[ext_resource type="Script" path="res://Scripts/building.gd" id="2_1hraq"]
+[ext_resource type="Script" path="res://Scripts/main_building.gd" id="1_63ldq"]
 [ext_resource type="Texture2D" uid="uid://dup0rmq730omu" path="res://Project Assets/Build2/Building2_stoneDark.png" id="2_pp8j7"]
 [ext_resource type="Texture2D" uid="uid://b0ax78mfinhhg" path="res://Project Assets/Build2/Building2_bricks.png" id="3_qpcf6"]
 [ext_resource type="Texture2D" uid="uid://t4504ohl3qxh" path="res://Project Assets/Build2/Building2__defaultMat.png" id="4_r5pdl"]
@@ -179,7 +179,7 @@ data = PackedVector3Array(1.5, 0.2887, -1, 1.5, -0.2887, -1, 1.5, -0.2887, 0, 1.
 [node name="MainBuilding" type="StaticBody3D"]
 collision_layer = 4
 collision_mask = 65
-script = ExtResource("2_1hraq")
+script = ExtResource("1_63ldq")
 
 [node name="Build1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1.19209e-07, -1, 0, 1, -1.19209e-07, 0, 0, 0)

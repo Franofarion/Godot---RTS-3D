@@ -11,5 +11,3 @@ visible = false
 
 [node name="Mace" parent="Armature/Skeleton3D/BoneAttachment3D/weapon/weapon2" index="1"]
 visible = true
-
-[editable path="Armature/Skeleton3D/BoneAttachment3D/weapon"]

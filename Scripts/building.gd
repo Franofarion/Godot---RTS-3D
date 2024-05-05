@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Building
+
 @onready var unit_destination = $UnitDestination
 
 # player team = 0
@@ -9,6 +11,8 @@ var team_colors : Dictionary = {
 	0: preload("res://Project Assets/Materials/TeamBlueMat.tres"),
 	1: preload("res://Project Assets/Materials/TeamRedMat.tres")
 }
+
+var unit_img = preload("res://Project Assets/GUI/MainBuildingImg.jpg")
 
 enum building_types {MAIN_BUILDING, UNIT_BUILDING}
 var building_type
