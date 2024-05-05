@@ -52,3 +52,4 @@ wheel_up={
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Environment"
 3d_physics/layer_6="Resources"
+3d_physics/layer_7="Areas"
