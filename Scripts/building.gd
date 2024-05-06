@@ -16,6 +16,8 @@ var team_colors : Dictionary = {
 	1: preload("res://Project Assets/Materials/TeamRedMat.tres")
 }
 
+var selected: bool = false
+
 const worker_unit = preload("res://Scenes/worker.tscn")
 const warrior_unit = preload("res://Scenes/warrior.tscn")
 const worker_unit_img = preload("res://Project Assets/GUI/WorkerImg.jpg")
@@ -57,12 +59,18 @@ func _ready():
 	unit_destination.position = $UnitSpawnPoint.position + Vector3(0.1, 0, 0.1)
 
 func select():
+	selected = false
 	$BuildingRing.visible = true
 	unit_destination.visible = true
+	if current_created_units != 0:
+		unit_progress_bar_container.visible = true
 
 func deselect():
+	selected = false
 	$BuildingRing.visible = false
 	unit_destination.visible = false
+	unit_progress_bar_container.visible = false
+	
 
 func add_unit_to_spawn(unit):
 	if current_created_units < max_units:
@@ -78,11 +86,12 @@ func add_unit_to_spawn(unit):
 			var tween := get_tree().create_tween()
 			new_tween = tween
 			new_tween.tween_property(unit_progress_bar, "value", 100.0, 3)
+			new_tween.finished.connect(tween_callable_spawn_unit)			
 			spawn_repeat()
 			unit_progress_bar_container.visible = true 
 
 func spawn_repeat():
-	new_tween.finished.connect(tween_callable_spawn_unit)
+	new_tween.play()
 
 func spawn_unit():
 	new_tween.stop()
@@ -109,8 +118,9 @@ func repeat_or_finish_spawning():
 		new_tween.kill()
 		unit_progress_bar_container.visible = false
 	else:
-		new_tween.play()
+		spawn_repeat()
 		new_tween.tween_callback(tween_callable_spawn_repeat)
+	if current_created_units != 0 and selected:
 		unit_progress_bar_container.visible = true
 
 func cancel_unit(img, unit):

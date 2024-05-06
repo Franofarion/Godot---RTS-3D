@@ -143,7 +143,9 @@ func get_unit_in_box(top_left, bot_right):
 	var box = Rect2(top_left, bot_right - top_left)
 	var box_selected_unit = []
 	for unit in get_tree().get_nodes_in_group("units"):
-		if unit.team == team and box.has_point(cam.unproject_position(unit.global_transform.origin)):
+		if (unit.team == team 
+			and unit is Unit
+			and box.has_point(cam.unproject_position(unit.global_transform.origin))):
 			if box_selected_unit.size() <= selection_limit:
 				box_selected_unit.append(unit)
 	return box_selected_unit
