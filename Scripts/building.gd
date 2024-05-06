@@ -7,6 +7,7 @@ class_name Building
 @onready var unit_progress_bar = $UnitProgressContainer/VBoxContainer/UnitProgressBar
 @onready var unit_progress_bar_container = $UnitProgressContainer
 @onready var nav_mesh = get_parent()
+@onready var unit_health_bar = $HealthBar/SubViewport/HealthProgressBar
 
 # player team = 0
 # enemy team = 1
@@ -57,6 +58,7 @@ func _ready():
 	if team in team_colors:
 		$BuildingRing.material_override = team_colors[team]
 	unit_destination.position = $UnitSpawnPoint.position + Vector3(0.1, 0, 0.1)
+	unit_health_bar.value = health
 
 func select():
 	selected = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://djbah3h28qafn"]
+[gd_scene load_steps=20 format=3 uid="uid://djbah3h28qafn"]
 
 [ext_resource type="Script" path="res://Scripts/main_building.gd" id="1_63ldq"]
 [ext_resource type="Texture2D" uid="uid://dup0rmq730omu" path="res://Project Assets/Build2/Building2_stoneDark.png" id="2_pp8j7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bwcivvyks8c5r" path="res://Project Assets/Build2/Building2_stone.png" id="5_hiyuu"]
 [ext_resource type="Texture2D" uid="uid://reme8ey4mciq" path="res://Project Assets/Build2/Building2_dark.png" id="6_gmfvp"]
 [ext_resource type="PackedScene" uid="uid://h0hkkc2ok4hs" path="res://Scenes/unit_progress_container.tscn" id="7_ynbto"]
+[ext_resource type="PackedScene" uid="uid://c1bbsbgopbwi8" path="res://Scenes/health_bar.tscn" id="8_sijjf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gp5jc"]
 resource_name = "stoneDark"
@@ -214,3 +215,6 @@ shape = SubResource("ConcavePolygonShape3D_3vg4g")
 
 [node name="UnitProgressContainer" parent="." instance=ExtResource("7_ynbto")]
 visible = false
+
+[node name="HealthBar" parent="." instance=ExtResource("8_sijjf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.96885, 0)

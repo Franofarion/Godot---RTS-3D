@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1bbsbgopbwi8"]
+
+[ext_resource type="Texture2D" uid="uid://ddpastrxhixcf" path="res://Project Assets/GUI/Health_bar_empty.png" id="1_1ktfg"]
+[ext_resource type="Script" path="res://Scripts/health_bar.gd" id="1_dqnrt"]
+[ext_resource type="Texture2D" uid="uid://bjxmy3rrywrtd" path="res://Project Assets/GUI/HealthBar.png" id="2_5rgjh"]
+
+[node name="HealthBar" type="Sprite3D"]
+pixel_size = 0.0014
+billboard = 1
+no_depth_test = true
+render_priority = -128
+script = ExtResource("1_dqnrt")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1612, 223)
+render_target_update_mode = 4
+
+[node name="HealthProgressBar" type="TextureProgressBar" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_under = ExtResource("1_1ktfg")
+texture_progress = ExtResource("2_5rgjh")

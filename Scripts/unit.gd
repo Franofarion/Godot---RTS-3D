@@ -9,6 +9,7 @@ var state_machine
 enum states {IDLE, WALKING, ATTACKING, MINING, BUILDING}
 var current_state = states.IDLE
 @onready var animation_tree = $AnimationTree
+@onready var unit_health_bar = $HealthBar/SubViewport/HealthProgressBar
 
 enum unit_types {WORKER, WARRIOR}
 var unit_type
@@ -29,6 +30,7 @@ var team_colors : Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	unit_health_bar.value = health
 	state_machine = animation_tree.get("parameters/playback")
 	speed = 0
 	if team in team_colors:
