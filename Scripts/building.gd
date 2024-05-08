@@ -8,6 +8,9 @@ class_name Building
 @onready var unit_progress_bar_container = $UnitProgressContainer
 @onready var nav_mesh = get_parent()
 @onready var unit_health_bar = $HealthBar/SubViewport/HealthProgressBar
+@onready var rts_controller = get_tree().get_root().get_node("World/RTSController")
+@onready var gui_controller = get_tree().get_root().get_node("World/CanvasLayer/GUIController")
+
 
 # player team = 0
 # enemy team = 1
@@ -17,6 +20,10 @@ var team_colors : Dictionary = {
 	1: preload("res://Project Assets/Materials/TeamRedMat.tres")
 }
 
+var green_mat = preload("res://Project Assets/Materials/GreenStracture.tres")
+var red_mat = preload("res://Project Assets/Materials/RedStracture.tres")
+var see_through_mat = preload("res://Project Assets/Materials/SeeThroughStracture.tres")
+
 var selected: bool = false
 
 const worker_unit = preload("res://Scenes/worker.tscn")
@@ -24,6 +31,9 @@ const warrior_unit = preload("res://Scenes/warrior.tscn")
 const worker_unit_img = preload("res://Project Assets/GUI/WorkerImg.jpg")
 const warrior_unit_img = preload("res://Project Assets/GUI/WarriorImg.jpg")
 var unit_img = preload("res://Project Assets/GUI/MainBuildingImg.jpg")
+const building_process_img = preload("res://Project Assets/GUI/progress_bar.png")
+const building_health_img = preload("res://Project Assets/GUI/HealthBar.png")
+
 
 enum building_types {MAIN_BUILDING, UNIT_BUILDING}
 var building_type
@@ -60,6 +70,58 @@ func _ready():
 	unit_destination.position = $UnitSpawnPoint.position + Vector3(0.1, 0, 0.1)
 	unit_health_bar.value = health
 
+func _process(delta):
+	if under_construction:
+		$HealthBar.visible = false
+		rts_controller.is_building = true
+		var raycast_pos = rts_controller.raycast_from_mouse(1).position
+		if !is_rotating:
+			self.position = raycast_pos
+		if Input.is_action_pressed("select"):
+			is_rotating = true
+			if raycast_pos != global_transform.origin:
+				look_at(raycast_pos)
+		elif Input.is_action_just_pressed("select") and !can_build and is_rotating:
+			is_rotating = false
+		elif Input.is_action_just_released("select") and can_build and is_rotating:
+			unit_health_bar.texture_progress = building_process_img
+			unit_health_bar.value = progress_start
+			$HealthBar.visible = true
+			$BuildArea/CollisionShape3D.disabled = true
+			$Mesh.material_override = see_through_mat
+			nav_mesh.bake_navigation_mesh()
+			$CollisionShape3D.disabled = false
+			nav_mesh.bake_finished.connect(send_unit, CONNECT_ONE_SHOT)
+			under_construction = false
+			self.set_process(false)
+		
+		if Input.is_action_just_pressed("command"):
+			rts_controller.is_building = false
+			gui_controller.add_minerals(cost)
+			queue_free()
+
+func send_unit():
+	unit_building.call_deferred("build_structure", self)
+	rts_controller.is_building = false
+
+func create_structure(unit):
+	$Mesh.material_override = green_mat
+	under_construction = true
+	$CollisionShape3D.disabled = true
+	unit_building = unit
+
+func activate_building():
+	active = true
+	$Mesh.material_override = null
+	$CollisionShape3D.disabled = false
+	unit_health_bar.texture_progress = building_health_img
+
+func add_health(unit):
+	if unit_health_bar.value == 100:
+		unit.change_state("idle")
+		activate_building()
+		return
+	unit_health_bar.value += 1
 func select():
 	selected = false
 	$BuildingRing.visible = true
@@ -142,4 +204,14 @@ func move_to(target_pos):
 		get_world_3d().get_navigation_map(), target_pos
 	)
 	unit_destination.global_transform.origin = closest_pos
-	
+
+func _on_build_area_body_entered(body):
+	if under_construction:
+		$Mesh.material_override = red_mat
+		can_build = false
+
+
+func _on_build_area_body_exited(body):
+	if $BuildArea.get_overlapping_bodies().size() == 0:
+		$Mesh.material_override = green_mat
+		can_build = true

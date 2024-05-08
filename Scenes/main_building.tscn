@@ -183,7 +183,7 @@ collision_layer = 4
 collision_mask = 65
 script = ExtResource("1_63ldq")
 
-[node name="Build1" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1.19209e-07, -1, 0, 1, -1.19209e-07, 0, 0, 0)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_85pj5")
@@ -218,3 +218,6 @@ visible = false
 
 [node name="HealthBar" parent="." instance=ExtResource("8_sijjf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.96885, 0)
+
+[connection signal="body_entered" from="BuildArea" to="." method="_on_build_area_body_entered"]
+[connection signal="body_exited" from="BuildArea" to="." method="_on_build_area_body_exited"]

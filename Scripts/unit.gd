@@ -10,6 +10,9 @@ enum states {IDLE, WALKING, ATTACKING, MINING, BUILDING}
 var current_state = states.IDLE
 @onready var animation_tree = $AnimationTree
 @onready var unit_health_bar = $HealthBar/SubViewport/HealthProgressBar
+@onready var rts_controller = get_tree().get_root().get_node("World/RTSController")
+@onready var gui_controller = get_tree().get_root().get_node("World/CanvasLayer/GUIController")
+@onready var nav_region = get_parent()
 
 enum unit_types {WORKER, WARRIOR}
 var unit_type
@@ -68,6 +71,12 @@ func change_state(state):
 			current_state = states.WALKING
 			state_machine.travel("Walk")
 			speed = 2
+		"attacking":
+			current_state = states.ATTACKING
+		"mining":
+			current_state = states.MINING
+		"building":
+			current_state = states.BUILDING
 
 func move_to(target_pos):
 	change_state("walking")

@@ -98,8 +98,10 @@ func activate_button(button):
 		var unit_cost = unit_button_ins.cost
 		if minerals >= unit_cost:
 			spend_minerals(unit_cost)
+			selected_unit.create_structure(unit_button_ins)
 	elif unit_button_ins is Unit:
 		var unit_cost = unit_button_ins.cost
-		if minerals >= unit_cost and selected_unit.current_created_units <= selected_unit.max_units:
-			spend_minerals(unit_cost)
-			selected_unit.add_unit_to_spawn(unit_button_ins)
+		if selected_unit.active:
+			if minerals >= unit_cost and selected_unit.current_created_units <= selected_unit.max_units:
+				spend_minerals(unit_cost)
+				selected_unit.add_unit_to_spawn(unit_button_ins)

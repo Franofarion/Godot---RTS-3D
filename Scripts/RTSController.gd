@@ -21,9 +21,11 @@ var unit_pos_index = 0
 
 const selection_limit = 24
 
+var is_building = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$"../NavigationRegion3D/MainBuilding".active = true
 
 func _input(event):
 	if event.is_action_pressed("wheel_down"):
@@ -36,19 +38,20 @@ func _process(delta):
 	m_pos = get_viewport().get_mouse_position()
 	camera_movement(delta)
 	
-	# Inputs 
-	if Input.is_action_just_pressed("command"):
-		move_selected_units()
-	if Input.is_action_just_pressed("select"):
-		selection_box.start_pos = m_pos
-		start_sel_pos = m_pos
-	if Input.is_action_just_released("select"):
-		select_units()
-	if Input.is_action_pressed("select"):
-		selection_box.m_pos = m_pos
-		selection_box.is_visible = true
-	else:
-		selection_box.is_visible = false
+	if not is_building:
+		# Inputs 
+		if Input.is_action_just_pressed("command"):
+			move_selected_units()
+		if Input.is_action_just_pressed("select"):
+			selection_box.start_pos = m_pos
+			start_sel_pos = m_pos
+		if Input.is_action_just_released("select"):
+			select_units()
+		if Input.is_action_pressed("select"):
+			selection_box.m_pos = m_pos
+			selection_box.is_visible = true
+		else:
+			selection_box.is_visible = false
 
 func camera_movement(delta):
 	var viewport_size : Vector2 = get_viewport().size
@@ -129,6 +132,13 @@ func move_selected_units():
 			elif first_unit is Unit:
 				for unit in selected_units:
 					position_units(unit, result)
+		elif result.collider is Building:
+			for unit in selected_units:
+				if unit is Unit:
+					if unit is Worker:
+						unit.build_structure(result.collider)
+					elif unit is Warrior:
+						position_units(unit, result)
 
 func get_unit_in_box(top_left, bot_right):
 	if top_left.x > bot_right.x:
