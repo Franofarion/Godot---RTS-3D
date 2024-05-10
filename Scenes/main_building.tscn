@@ -219,5 +219,6 @@ visible = false
 [node name="HealthBar" parent="." instance=ExtResource("8_sijjf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.96885, 0)
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="body_entered" from="BuildArea" to="." method="_on_build_area_body_entered"]
 [connection signal="body_exited" from="BuildArea" to="." method="_on_build_area_body_exited"]

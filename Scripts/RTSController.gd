@@ -18,9 +18,8 @@ var old_selected_units : Array = []
 var start_sel_pos = Vector2()
 var target_positions_list : Array[Vector3] = []
 var unit_pos_index = 0
-
 const selection_limit = 24
-
+var main_buildings: Array[Building] = []
 var is_building = false
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +28,7 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("wheel_down"):
-		cam.fov = lerp(cam.fov, 75.0, 0.25)
+		cam.fov = lerp(cam.fov, 150.0, 0.25)
 	elif event.is_action_pressed("wheel_up"):
 		cam.fov = lerp(cam.fov, 25.0, 0.25)
 
@@ -52,26 +51,45 @@ func _process(delta):
 			selection_box.is_visible = true
 		else:
 			selection_box.is_visible = false
+		# Camera movement
+		if Input.is_action_pressed("camera_left"):
+			move_camera("left", delta)
+		if Input.is_action_pressed("camera_up"):
+			move_camera("up", delta)
+		if Input.is_action_pressed("camera_down"):
+			move_camera("down", delta)
+		if Input.is_action_pressed("camera_right"):
+			move_camera("right", delta)
 
-func camera_movement(delta):
-	var viewport_size : Vector2 = get_viewport().size
-	var origin : Vector3 = global_transform.origin
+func move_camera(pos, delta):
+	var origin : Vector3 = global_transform.origin	
 	var move_vec := Vector3()
-	# wtf is that 
-	if origin.x > -62:
-		if m_pos.x < MOVE_MARGIN:
-			move_vec.x -= 1
-	if origin.z > -65:
-		if m_pos.y < MOVE_MARGIN:
-			move_vec.z -= 1 
-	if origin.x < 62:
-		if m_pos.x > viewport_size.x - MOVE_MARGIN:
-			move_vec.x += 1
-	if origin.z < 90:
-		if m_pos.y > viewport_size.y - MOVE_MARGIN:
-			move_vec.z += 1
+	match pos:
+		"left":
+			if origin.x > -62:
+				move_vec.x -= 1
+		"up":
+			if origin.z > -65:
+				move_vec.z -= 1
+		"down":
+			if origin.z < 90:
+				move_vec.z += 1
+		"right":
+			if origin.x < 62:
+				move_vec.x += 1
 	move_vec = move_vec.rotated(Vector3(0, 1, 0), rad_to_deg(rotation.y))
 	global_translate(move_vec  * delta * MOVE_SPEED)
+
+func camera_movement(delta):
+	var viewport_size : Vector2 = get_viewport().size	
+	if m_pos.x < MOVE_MARGIN:
+		move_camera("left", delta)
+	if m_pos.y < MOVE_MARGIN:
+		move_camera("up", delta)
+	if m_pos.x > viewport_size.x - MOVE_MARGIN:
+		move_camera("right", delta)
+	if m_pos.y > viewport_size.y - MOVE_MARGIN:
+		move_camera("down", delta)
 
 func raycast_from_mouse(collision_mask):
 	# standard position of the request
@@ -132,6 +150,7 @@ func move_selected_units():
 			elif first_unit is Unit:
 				for unit in selected_units:
 					position_units(unit, result)
+		# BUILDING
 		elif result.collider is Building:
 			for unit in selected_units:
 				if unit is Unit:
@@ -139,6 +158,13 @@ func move_selected_units():
 						unit.build_structure(result.collider)
 					elif unit is Warrior:
 						position_units(unit, result)
+		# MINERAL FIELD 
+		elif result.collider is MineralField:
+			for unit in selected_units:
+				if unit is Worker:
+					unit.mine_mineral_field(result.collider)
+				elif unit is Warrior:
+					position_units(unit, result)
 
 func get_unit_in_box(top_left, bot_right):
 	if top_left.x > bot_right.x:

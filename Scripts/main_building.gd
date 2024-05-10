@@ -9,4 +9,9 @@ func _ready():
 	spawning_unit = worker_unit
 	spawning_img = worker_unit_img
 	unit_img = preload("res://Project Assets/GUI/MainBuildingImg.jpg")
+	rts_controller.main_buildings.append(self)
 
+
+
+func _on_tree_exiting():
+	rts_controller.main_buildings.erase(self)
