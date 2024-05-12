@@ -6,6 +6,31 @@
 [node name="Warrior" instance=ExtResource("1_2ic7r")]
 script = ExtResource("2_sq3xu")
 
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(-0.700729, 0.0103403, -0.0217188, 0.713022)
+bones/1/rotation = Quaternion(0.0144386, 0.00391316, -0.00290407, 0.999884)
+bones/2/rotation = Quaternion(0.00338567, 0.00613678, 0.00420167, 0.999967)
+bones/3/rotation = Quaternion(0.00338571, 0.00613678, 0.00420166, 0.999967)
+bones/4/rotation = Quaternion(-0.0127345, -0.00411342, -0.0104906, 0.999855)
+bones/5/rotation = Quaternion(0.0235005, -0.0268053, 0.0160074, 0.999236)
+bones/7/rotation = Quaternion(0.670885, 0.32988, -0.507984, 0.427836)
+bones/8/rotation = Quaternion(0.364887, -0.0734982, -0.0137717, 0.928044)
+bones/9/rotation = Quaternion(0.0770374, 0.167688, 0.267254, 0.945791)
+bones/11/rotation = Quaternion(0.643627, -0.355469, 0.551243, 0.394358)
+bones/12/rotation = Quaternion(0.395335, 0.082232, 0.134342, 0.904931)
+bones/13/rotation = Quaternion(0.106868, -0.122136, -0.206819, 0.964825)
+bones/15/rotation = Quaternion(0.0698176, 0.187413, 0.978326, -0.0536674)
+bones/16/rotation = Quaternion(-0.604089, 0.0143426, -0.0308983, 0.796188)
+bones/17/rotation = Quaternion(0.644574, 0.487815, -0.389563, 0.441363)
+bones/18/rotation = Quaternion(-0.0942442, 0.0290598, -0.0057194, 0.995108)
+bones/20/rotation = Quaternion(-0.0740338, 0.0787258, 0.994078, -0.0114132)
+bones/21/rotation = Quaternion(-0.143212, -0.0690823, 0.0472878, 0.986145)
+bones/22/rotation = Quaternion(0.599636, -0.479265, 0.381209, 0.515191)
+bones/23/rotation = Quaternion(-0.0741606, -0.0364556, -0.0360324, 0.995928)
+
+[node name="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.236478, -0.0637068, 0.969546, 0.955046, 0.198852, -0.219875, -0.178788, 0.977957, 0.107867, -216.831, 22.6482, -271.358)
+
 [node name="Hammer" parent="Armature/Skeleton3D/BoneAttachment3D/weapon/weapon2" index="0"]
 visible = false
 

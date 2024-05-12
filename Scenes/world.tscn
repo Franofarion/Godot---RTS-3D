@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://df24bpa2sxsgt"]
+[gd_scene load_steps=22 format=3 uid="uid://df24bpa2sxsgt"]
 
 [ext_resource type="Script" path="res://Scripts/RTSController.gd" id="1_0vw6l"]
 [ext_resource type="Material" uid="uid://d0i3q6j44jwns" path="res://Project Assets/Materials/FloorMat.tres" id="1_bmfmw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://udwph81goyv4" path="res://Scenes/unit_building.tscn" id="3_nadgs"]
 [ext_resource type="Script" path="res://Scripts/UnitSelector.gd" id="3_rlpkm"]
 [ext_resource type="PackedScene" uid="uid://6gn4nl0r1syx" path="res://Scenes/minerals.tscn" id="4_mqlil"]
+[ext_resource type="PackedScene" uid="uid://bxvbog4su7lhx" path="res://Scenes/worker_ai.tscn" id="5_8vw1n"]
 [ext_resource type="Texture2D" uid="uid://k7fnbofhk0c2" path="res://Project Assets/GUI/DetailBar.png" id="5_hbtay"]
 [ext_resource type="Script" path="res://Scripts/GUIController.gd" id="5_jk4fq"]
 [ext_resource type="Texture2D" uid="uid://d2p1j6ypo4vf5" path="res://Project Assets/GUI/MiniMap_Portrait.png" id="6_1pmea"]
@@ -13,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bb8sf1tl1kjka" path="res://Project Assets/GUI/WorkerImg.jpg" id="8_rugpl"]
 [ext_resource type="Texture2D" uid="uid://djhyxgkv3fwth" path="res://Project Assets/GUI/MainBuildingImg.jpg" id="12_lcicx"]
 [ext_resource type="Texture2D" uid="uid://chdqssq55t7ta" path="res://Project Assets/GUI/rock.png" id="14_2163s"]
+[ext_resource type="Script" path="res://Scripts/mini_map.gd" id="15_t7qs2"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_qp8yk"]
 vertices = PackedVector3Array(-10.5, 0.156, -17.25, -8.75, 0.156, -17.75, -8.75, 0.156, -149.5, -10.75, 0.156, -16, -10.5, 0.156, -17.25, -8.75, 0.156, -149.5, -149.5, 0.156, -149.5, -149.5, 0.156, -16, -7, 0.156, -15.25, -4, 0.156, -15.25, -4, 0.156, -16, -4, 0.156, -16, -3, 0.156, -16.5, -1.5, 0.156, -18.5, -7.5, 0.156, -17.5, -7, 0.156, -15.25, -8.75, 0.156, -17.75, -7.5, 0.156, -17.5, -1.5, 0.156, -18.5, -1.5, 0.156, -149.5, -8.75, 0.156, -149.5, -1.5, 0.156, -18.5, 1.5, 0.156, -18.5, 1.5, 0.156, -149.5, -1.5, 0.156, -149.5, 1.5, 0.156, -18.5, 3, 0.156, -16.5, 4, 0.156, -16, 8.75, 0.156, -15.75, 10, 0.156, -16.5, 4, 0.156, -16, 4, 0.156, -14.5, 8, 0.156, -14, 8.75, 0.156, -15.75, 1.5, 0.156, -18.5, 10, 0.156, -16.5, 11.25, 0.156, -16.5, 11.25, 0.156, -149.5, 1.5, 0.156, -149.5, 13, 0.156, -16.25, 13.25, 0.156, -15.5, 14.5, 0.156, -14.75, 11.25, 0.156, -149.5, 11.25, 0.156, -149.5, 11.25, 0.156, -16.5, 13, 0.156, -16.25, 14.5, 0.156, -14.75, 15.25, 0.156, -11.75, 149.5, 0.156, -12, 149.5, 0.156, -149.5, 11.25, 0.156, -149.5, 11.75, 0.156, -13.75, 11, 0.156, -13.75, 11, 0.156, -13.25, 4, 0.156, -14.5, 3, 0.156, -14.25, 2.75, 0.156, -13.25, 8.5, 0.156, -12, 8, 0.156, -12.5, -2.75, 0.156, -13.25, -3, 0.156, -14.25, -4, 0.156, -14.5, -7.25, 0.156, -14.5, -8.25, 0.156, -14, 10.75, 0.156, -5.25, 11.25, 0.156, -5.5, 11.5, 0.256, -7, 11.25, 0.156, -9.25, 9.5, 0.156, -12, 8.5, 0.156, -12, 12.75, 0.156, -12.5, 11.75, 0.156, -13.75, 11, 0.156, -13.25, 9.5, 0.156, -12, 11.25, 0.156, -9.25, -0.75, 0.156, -13, -1, 0.156, -13.5, -2.75, 0.156, -13.25, -4, 0.156, -14.5, -4, 0.156, -15.25, -7, 0.156, -15.25, -7.25, 0.156, -14.5, 10.75, 0.156, -3.75, 10.75, 0.156, -5.25, 8.5, 0.156, -12, 2.75, 0.156, -13.25, -0.75, 0.156, -13, 15, 0.156, 149.5, 15, 0.156, 0.75, 11.75, 0.156, -0.75, -10, 0.156, -14, -10.75, 0.156, -16, -149.5, 0.156, -16, -2.75, 0.156, -13.25, -8.25, 0.156, -14, -10, 0.156, -14, -0.75, 0.156, -13, -2.75, 0.156, -13.25, -10, 0.156, -14, 11.75, 0.156, -0.75, 10.75, 0.156, -3.75, -0.75, 0.156, -13, 8, 0.156, -12.5, 8, 0.156, -14, 4, 0.156, -14.5, 11.75, 0.156, -0.75, -0.75, 0.156, -13, -10, 0.156, -14, -149.5, 0.156, -16, -149.5, 0.156, 149.5, 15, 0.156, 149.5, -0.25, 3.656, -15.75, -0.25, 3.656, -15.25, 0.25, 3.656, -15.25, 0.25, 3.656, -15.75, 13.5, 0.156, -5.25, 13.5, 0.156, -3, 14.25, 0.156, -3, 14, 0.156, -5.5, 13.5, 0.156, -5.25, 14.25, 0.156, -3, 15, 0.156, -2, 16.75, 0.156, -4.5, 15.25, 0.156, -10.25, 14.25, 0.156, -9.5, 13.75, 0.156, -8, 14, 0.156, -5.5, 16.75, 0.156, -4.5, 17.75, 0.156, -4.5, 15.25, 0.156, -10.25, 17.75, 0.156, -4.5, 18.25, 0.156, -4, 149.5, 0.156, -2.5, 149.5, 0.156, -12, 15.25, 0.156, -11.75, 18.25, 0.156, -4, 18.25, 0.156, -2.5, 149.5, 0.156, -2.5, 149.5, 0.156, -2.5, 18.25, 0.156, -2.5, 18.25, 0.156, -1, 149.5, 0.156, -2.5, 18.25, 0.156, -1, 17, 0.156, 0.25, 149.5, 0.156, -2.5, 17, 0.156, 0.25, 15, 0.156, 0.75, 15, 0.156, 149.5, 149.5, 0.156, 149.5)
@@ -52,6 +54,7 @@ adjustment_brightness = 0.66
 navigation_mesh = SubResource("NavigationMesh_qp8yk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+layers = 3
 mesh = SubResource("PlaneMesh_gotry")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D" groups=["surface"]]
@@ -71,6 +74,17 @@ transform = Transform3D(0.234633, 0, -0.972084, 0, 1, 0, 0.972084, 0, 0.234633, 
 [node name="Minerals2" parent="NavigationRegion3D" instance=ExtResource("4_mqlil")]
 transform = Transform3D(-0.680529, 0, -0.732721, 0, 1, 0, 0.732721, 0, -0.680529, 13.2014, 0, 4.57828)
 
+[node name="EnemyUnits" type="Node" parent="NavigationRegion3D"]
+
+[node name="WorkerAI" parent="NavigationRegion3D/EnemyUnits" instance=ExtResource("5_8vw1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.15513)
+
+[node name="WorkerAI2" parent="NavigationRegion3D/EnemyUnits" instance=ExtResource("5_8vw1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.72895, 0, 9.93365)
+
+[node name="WorkerAI3" parent="NavigationRegion3D/EnemyUnits" instance=ExtResource("5_8vw1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.52585, 0, 9.93365)
+
 [node name="RTSController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 0, 0)
 script = ExtResource("1_0vw6l")
@@ -79,6 +93,10 @@ units_in_line = 4
 
 [node name="Camera3D" type="Camera3D" parent="RTSController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 17)
+
+[node name="RayCast3D" type="RayCast3D" parent="RTSController/Camera3D"]
+transform = Transform3D(-0.851618, -0.395979, 0.343434, -0.522907, 0.596492, -0.608906, 0.0362585, -0.698139, -0.715044, 0, 0, 0)
+target_position = Vector3(100, 100, 100)
 
 [node name="UnitSelector" type="Control" parent="RTSController"]
 layout_mode = 3
@@ -232,6 +250,31 @@ layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 
+[node name="MiniMap" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -365.0
+offset_right = 367.0
+offset_bottom = -20.0
+grow_vertical = 0
+stretch = true
+script = ExtResource("15_t7qs2")
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/MiniMap"]
+size = Vector2i(350, 345)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/MiniMap/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 23, 0)
+cull_mask = 2
+projection = 1
+size = 200.0
+near = 0.001
+far = 100.0
+
 [connection signal="units_selected" from="RTSController" to="CanvasLayer/GUIController" method="_on_rts_controller_units_selected"]
 [connection signal="pressed" from="CanvasLayer/GUIController/SelectionBar/BuildingGrid/OptionButtonOne" to="CanvasLayer/GUIController" method="_on_option_button_one_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUIController/SelectionBar/BuildingGrid/OptionButtonTwo" to="CanvasLayer/GUIController" method="_on_option_button_two_pressed"]
+[connection signal="gui_input" from="CanvasLayer/MiniMap" to="CanvasLayer/MiniMap" method="_on_gui_input"]

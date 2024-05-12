@@ -48,6 +48,8 @@ func _on_navigation_agent_3d_target_reached():
 		gui_controller.add_minerals(5)
 		rock_mine = false
 		mining_repeat()
+	elif current_state == states.ATTACKING:
+		attack()
 	else:
 		build_timer.stop()
 		change_state("idle")
@@ -109,3 +111,6 @@ func _on_work_timer_timeout():
 
 func _on_mine_timer_timeout():
 	mineral_field_to_mine.mine_field(self)
+
+func _on_attack_timer_timeout():
+	search_for_ennemies("enemy")
